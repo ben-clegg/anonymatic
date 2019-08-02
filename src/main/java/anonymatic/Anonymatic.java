@@ -1,6 +1,9 @@
 package anonymatic;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,21 @@ public class Anonymatic
         for (Solution s : solutions)
         {
             s.anonymise(outputDir);
+        }
+
+        File mapCsvFile = new File(outputDirPath + File.separator + "keymap.csv");
+        List<String> csvLines = new ArrayList<>();
+        csvLines.add("Student Name,Anonymised Key");
+        for (Solution s : solutions)
+        {
+            csvLines.add(s.getOriginalName() + "," + s.getAnonymisedName());
+        }
+        try
+        {
+            Files.write(mapCsvFile.toPath(), csvLines, StandardCharsets.UTF_8);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 

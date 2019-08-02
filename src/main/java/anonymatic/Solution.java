@@ -9,7 +9,7 @@ import java.util.List;
 public class Solution
 {
     private String anonymisedName;
-    private File originalDir;
+    private String originalName;
     List<JavaFile> javaFiles = new ArrayList<JavaFile>();
 
 
@@ -19,6 +19,7 @@ public class Solution
         for (File f : locateFilesRecursive(solutionDir, ".java"))
             javaFiles.add(new JavaFile(f, solutionDir));
 
+        originalName = solutionDir.getName();
         anonymisedName = String.valueOf(this.hashCode());
     }
 
@@ -59,5 +60,15 @@ public class Solution
         {
             f.write(new File(solutionDir.getPath()));
         }
+    }
+
+    public String getOriginalName()
+    {
+        return originalName;
+    }
+
+    public String getAnonymisedName()
+    {
+        return anonymisedName;
     }
 }
