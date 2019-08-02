@@ -49,6 +49,7 @@ public class Anonymatic
         try
         {
             Files.write(mapCsvFile.toPath(), csvLines, StandardCharsets.UTF_8);
+            System.out.println("Written de-anonymisation keymap to " + mapCsvFile.getPath());
         } catch (IOException e)
         {
             e.printStackTrace();

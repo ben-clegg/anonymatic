@@ -60,6 +60,7 @@ public class Solution
         {
             f.write(new File(solutionDir.getPath()));
         }
+        System.out.println("Written anonymised solution to " + solutionDir.getPath());
     }
 
     public String getOriginalName()
