@@ -2,6 +2,8 @@ package anonymatic;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,8 +51,15 @@ public class JavaFile
         try
         {
             Files.lines(original.toPath()).forEachOrdered(s -> originalLines.add(s));
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
+            System.err.println("IO Exception from file " + original.getPath());
+            e.printStackTrace();
+        }
+        catch (UncheckedIOException e)
+        {
+            System.err.println("IO Exception from file " + original.getPath());
             e.printStackTrace();
         }
     }
